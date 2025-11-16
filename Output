@@ -1,0 +1,51 @@
+
+Anomaly Analysis Report
+=====================
+
+### Anomalies Visible Directly from the JSON
+
+1. **Transaction amount unusually high**: `AMOUNT_AUTHORIZED` is $2420000, which may indicate a large transaction.
+2. **Settlement amount mismatch**: `AMOUNT_SETTLED` is empty, indicating no settlement amount provided.
+3. **Newly created user performing large transaction**: The user has a unique ID (`ID`: "1000013") and performed a large transaction.
+
+### Explanation of Anomalies
+
+1. **Transaction amount unusually high**: This may indicate a potential fraud attempt, as the transaction amount is unusually high for a typical authorization transaction.
+2. **Settlement amount mismatch**: The absence of `AMOUNT_SETTLED` suggests that there might be an issue with the settlement process or that the merchant did not provide this information.
+3. **Newly created user performing large transaction**: This could indicate that the newly created user is attempting to perform a large transaction, which may be suspicious.
+
+### Fraud Strength and Weight
+
+1. **Transaction amount unusually high** (High): 0.8
+2. **Settlement amount mismatch** (Medium): 0.4
+3. **Newly created user performing large transaction** (Low): 0.2
+
+### Final Risk Score
+
+`risk_score`: `average(0.8, 0.4, 0.2) = 0.6`
+
+### Decision
+
+Based on the risk score, the decision is: **REVIEW**
+
+### Top 3 Triggers
+
+1. **Transaction amount unusually high**
+2. **Settlement amount mismatch**
+3. **Newly created user performing large transaction**
+
+### Final Recommendation
+
+The final recommendation is to review this transaction further due to the unusual high transaction amount and settlement amount mismatch.
+
+```json
+{
+  "risk_score": 0.6,
+  "decision": "REVIEW",
+  "triggers": [
+    "Transaction amount unusually high",
+    "Settlement amount mismatch",
+    "Newly created user performing large transaction"
+  ],
+  "explanation": "The transaction amount is unusually high, and there is a settlement amount mismatch. Additionally, the newly created user performed a large transaction."
+}
